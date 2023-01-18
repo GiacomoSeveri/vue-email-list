@@ -1,0 +1,24 @@
+console.log('Vue ok', Vue);
+
+const app = Vue.createApp({
+    name: 'Demo API',
+    data(){
+        return {
+            mails: [],
+        }
+    },
+    methods: {
+        getRandomMail(){
+            axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then((response) => {
+                this.mails.push(response.data.response);
+            })
+        }
+    },
+    mounted(){
+        for(let i = 0; i < 5; i++){
+            this.getRandomMail();
+        }
+    }
+});
+
+app.mount('#root');
